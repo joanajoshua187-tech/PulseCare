@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Calendar, FileText, LogOut, Stethoscope, Video} from 'lucide-react'
+import { LayoutDashboard, Calendar, FileText, LogOut, Stethoscope, Video } from 'lucide-react'
 
 export default function PatientDashboard() {
   const navigate = useNavigate()
@@ -44,7 +44,7 @@ export default function PatientDashboard() {
         <p className="text-gray-500 mb-8">Here's your health overview</p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <button
+          <button
             onClick={() => navigate('/symptoms')}
             className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
           >
@@ -52,8 +52,8 @@ export default function PatientDashboard() {
             <h3 className="font-semibold text-gray-800">Symptom Check</h3>
             <p className="text-sm text-gray-500 mt-1">Start a new assessment</p>
           </button>
-            
-                    <button
+
+          <button
             onClick={() => navigate('/book')}
             className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
           >
@@ -61,19 +61,17 @@ export default function PatientDashboard() {
             <h3 className="font-semibold text-gray-800">Book Appointment</h3>
             <p className="text-sm text-gray-500 mt-1">See available doctors</p>
           </button>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+
+          <button
+            onClick={() => navigate('/records')}
+            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
+          >
             <FileText className="text-blue-600 mb-2" size={24} />
             <h3 className="font-semibold text-gray-800">Health Records</h3>
             <p className="text-sm text-gray-500 mt-1">View your history</p>
-                      <button
-            onClick={() => navigate('/book')}
-            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
-          >
-            <Calendar className="text-teal-600 mb-2" size={24} />
-            <h3 className="font-semibold text-gray-800">Book Appointment</h3>
-            <p className="text-sm text-gray-500 mt-1">See available doctors</p>
           </button>
-                    <button
+
+          <button
             onClick={() => navigate('/appointments')}
             className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
           >
@@ -81,7 +79,6 @@ export default function PatientDashboard() {
             <h3 className="font-semibold text-gray-800">My Appointments</h3>
             <p className="text-sm text-gray-500 mt-1">Join or view consultations</p>
           </button>
-          </div>
         </div>
       </div>
     </div>
