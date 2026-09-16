@@ -44,11 +44,15 @@ export default function PatientDashboard() {
         <p className="text-gray-500 mb-8">Here's your health overview</p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <button
+            onClick={() => navigate('/symptoms')}
+            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
+          >
             <LayoutDashboard className="text-blue-600 mb-2" size={24} />
             <h3 className="font-semibold text-gray-800">Symptom Check</h3>
             <p className="text-sm text-gray-500 mt-1">Start a new assessment</p>
-          </div>
+          </button>
+            
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <Calendar className="text-teal-600 mb-2" size={24} />
             <h3 className="font-semibold text-gray-800">Book Appointment</h3>
