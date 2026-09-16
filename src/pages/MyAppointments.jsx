@@ -1,0 +1,91 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabaseClient'
+import { ArrowLeft, Calendar, Clock, Video, User } from 'lucide-react'
+
+export default function MyAppointments() {
+  const navigate = useNavigate()
+  const [appointments, setAppointments] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadAppointments = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        navigate('/login')
+        return
+      }
+
+      const { data, error } = await supabase
+        .from('appointments')
+        .select('*, providers(full_name, specialty)')
+        .eq('patient_id', user.id)
+        .order('appointment_date', { ascending: true })
+
+      if (!error) setAppointments(data)
+      setLoading(false)
+    }
+    loadAppointments()
+  }, [navigate])
+
+  return (
+    <div className="min-h-screen bg-slate-50 px-4 py-8">
+      <div className="max-w-2xl mx-auto">
+        <button
+          onClick={() => navigate('/dashboard')}
+          className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+        >
+          <ArrowLeft size={18} /> Back
+        </button>
+
+        <h1 className="text-xl font-bold text-gray-800 mb-1">My Appointments</h1>
+        <p className="text-gray-500 mb-6">Your scheduled and past visits</p>
+
+        {loading && <p className="text-gray-500">Loading...</p>}
+
+        {!loading && appointments.length === 0 && (
+          <div className="bg-white rounded-xl p-8 text-center border border-gray-100">
+            <p className="text-gray-500 mb-4">You have no appointments yet.</p>
+            <button
+              onClick={() => navigate('/book')}
+              className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700"
+            >
+              Book an Appointment
+            </button>
+          </div>
+        )}
+
+        <div className="space-y-3">
+          {appointments.map((appt) => (
+            <div key={appt.id} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <User className="text-blue-600" size={18} />
+                  <span className="font-semibold text-gray-800">{appt.providers?.full_name}</span>
+                </div>
+                <span className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full capitalize">
+                  {appt.status}
+                </span>
+              </div>
+              <p className="text-sm text-gray-500 mb-3">{appt.providers?.specialty}</p>
+              <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                <span className="flex items-center gap-1">
+                  <Calendar size={14} /> {appt.appointment_date}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Clock size={14} /> {appt.appointment_time}
+                </span>
+              </div>
+              <button
+                onClick={() => navigate(`/consultation/${appt.id}`)}
+                className="w-full flex items-center justify-center gap-2 bg-teal-600 text-white py-2 rounded-lg font-medium hover:bg-teal-700"
+              >
+                <Video size={18} /> Join Consultation
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}

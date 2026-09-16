@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Calendar, FileText, LogOut, Stethoscope } from 'lucide-react'
+import { LayoutDashboard, Calendar, FileText, LogOut, Stethoscope, Video} from 'lucide-react'
 
 export default function PatientDashboard() {
   const navigate = useNavigate()
@@ -65,6 +65,22 @@ export default function PatientDashboard() {
             <FileText className="text-blue-600 mb-2" size={24} />
             <h3 className="font-semibold text-gray-800">Health Records</h3>
             <p className="text-sm text-gray-500 mt-1">View your history</p>
+                      <button
+            onClick={() => navigate('/book')}
+            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
+          >
+            <Calendar className="text-teal-600 mb-2" size={24} />
+            <h3 className="font-semibold text-gray-800">Book Appointment</h3>
+            <p className="text-sm text-gray-500 mt-1">See available doctors</p>
+          </button>
+                    <button
+            onClick={() => navigate('/appointments')}
+            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
+          >
+            <Video className="text-teal-600 mb-2" size={24} />
+            <h3 className="font-semibold text-gray-800">My Appointments</h3>
+            <p className="text-sm text-gray-500 mt-1">Join or view consultations</p>
+          </button>
           </div>
         </div>
       </div>
