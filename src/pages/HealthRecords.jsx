@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
-import { ArrowLeft, User, Calendar, Activity, FileText } from 'lucide-react'
+import { ArrowLeft, User, Calendar, Activity, FileText, Pill } from 'lucide-react'
 
 export default function HealthRecords() {
   const navigate = useNavigate()
   const [profile, setProfile] = useState(null)
   const [assessments, setAssessments] = useState([])
   const [appointments, setAppointments] = useState([])
+  const [prescriptions, setPrescriptions] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -18,15 +19,17 @@ export default function HealthRecords() {
         return
       }
 
-      const [profileRes, assessRes, apptRes] = await Promise.all([
+      const [profileRes, assessRes, apptRes, presRes] = await Promise.all([
         supabase.from('patients').select('*').eq('id', user.id).single(),
         supabase.from('symptom_assessments').select('*').eq('patient_id', user.id).order('created_at', { ascending: false }),
         supabase.from('appointments').select('*, providers(full_name, specialty)').eq('patient_id', user.id).order('appointment_date', { ascending: false }),
+        supabase.from('prescriptions').select('*, providers(full_name, specialty)').eq('patient_id', user.id).order('created_at', { ascending: false }),
       ])
 
       setProfile(profileRes.data)
       setAssessments(assessRes.data || [])
       setAppointments(apptRes.data || [])
+      setPrescriptions(presRes.data || [])
       setLoading(false)
     }
     load()
@@ -87,6 +90,37 @@ export default function HealthRecords() {
               <p className="text-gray-400">Phone</p>
               <p className="text-gray-800 font-medium">{profile?.phone || '—'}</p>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Pill className="text-blue-600" size={20} />
+            <h2 className="font-semibold text-gray-800">Prescriptions</h2>
+          </div>
+          {prescriptions.length === 0 && (
+            <p className="text-sm text-gray-400">No prescriptions yet.</p>
+          )}
+          <div className="space-y-3">
+            {prescriptions.map((p) => (
+              <div key={p.id} className="border border-gray-100 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-medium text-gray-800">{p.medication_name}</span>
+                  <span className="text-xs text-gray-400">
+                    {new Date(p.created_at).toLocaleDateString()}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-600">
+                  {p.dosage} · {p.frequency} {p.duration && `· ${p.duration}`}
+                </p>
+                {p.instructions && (
+                  <p className="text-sm text-gray-500 mt-1 italic">"{p.instructions}"</p>
+                )}
+                <p className="text-xs text-gray-400 mt-2">
+                  Prescribed by {p.providers?.full_name} · {p.providers?.specialty}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
