@@ -53,11 +53,14 @@ export default function PatientDashboard() {
             <p className="text-sm text-gray-500 mt-1">Start a new assessment</p>
           </button>
             
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <button
+            onClick={() => navigate('/book')}
+            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
+          >
             <Calendar className="text-teal-600 mb-2" size={24} />
             <h3 className="font-semibold text-gray-800">Book Appointment</h3>
             <p className="text-sm text-gray-500 mt-1">See available doctors</p>
-          </div>
+          </button>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <FileText className="text-blue-600 mb-2" size={24} />
             <h3 className="font-semibold text-gray-800">Health Records</h3>

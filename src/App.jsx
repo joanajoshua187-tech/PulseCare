@@ -3,6 +3,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import PatientDashboard from './pages/PatientDashboard'
 import SymptomAssessment from './pages/SymptomAssessment'
+import BookAppointment from './pages/BookAppointment'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<PatientDashboard />} />
         <Route path="/symptoms" element={<SymptomAssessment />} />
+        <Route path="/book" element={<BookAppointment />} />
       </Routes>
     </BrowserRouter>
   )
