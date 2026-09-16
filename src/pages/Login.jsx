@@ -14,13 +14,29 @@ export default function Login() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    setLoading(false)
-    if (error) {
-      setError(error.message)
+
+    const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+    if (signInError) {
+      setError(signInError.message)
+      setLoading(false)
       return
     }
-    navigate('/dashboard')
+
+    const { data: profile } = await supabase
+      .from('patients')
+      .select('role')
+      .eq('id', data.user.id)
+      .single()
+
+    setLoading(false)
+
+    if (profile?.role === 'provider') {
+      navigate('/provider-dashboard')
+    } else if (profile?.role === 'admin') {
+      navigate('/admin-dashboard')
+    } else {
+      navigate('/dashboard')
+    }
   }
 
   return (

@@ -7,6 +7,7 @@ import BookAppointment from './pages/BookAppointment'
 import MyAppointments from './pages/MyAppointments'
 import Consultation from './pages/Consultation'
 import HealthRecords from './pages/HealthRecords'
+import ProviderDashboard from './pages/ProviderDashboard'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/appointments" element={<MyAppointments />} />
         <Route path="/consultation/:appointmentId" element={<Consultation />} />
         <Route path="/records" element={<HealthRecords />} />
+        <Route path="/provider-dashboard" element={<ProviderDashboard />} />
       </Routes>
     </BrowserRouter>
   )
