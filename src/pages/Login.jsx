@@ -22,7 +22,7 @@ export default function Login() {
       return
     }
 
-    const { data: profile } = await supabase
+            const { data: profile } = await supabase
       .from('patients')
       .select('role')
       .eq('id', data.user.id)
