@@ -72,13 +72,13 @@ export default function BookAppointment() {
   if (success) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Calendar className="text-green-600" size={28} />
+                <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center border border-ink/5">
+          <div className="w-16 h-16 bg-sage/15 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Calendar className="text-sage" size={28} />
           </div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">Appointment Booked</h2>
-          <p className="text-gray-600 mb-6">
-            Your appointment with {selectedProvider.full_name} on {date} at {time} has been scheduled.
+          <h2 className="font-serif text-2xl font-semibold text-ink mb-2">Thank you — you're booked.</h2>
+          <p className="text-ink/60 mb-6">
+            {selectedProvider.full_name} will see you on {date} at {time}. We'll be here when it's time.
           </p>
           <div className="flex gap-3">
             <button

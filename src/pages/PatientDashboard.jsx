@@ -26,11 +26,11 @@ export default function PatientDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+        <div className="min-h-screen bg-cream">
+            <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center border-b border-ink/5">
         <div className="flex items-center gap-2">
-          <Stethoscope className="text-blue-600" size={24} />
-          <span className="font-bold text-lg text-gray-800">PulseCare</span>
+          <Stethoscope className="text-coral" size={24} />
+          <span className="font-serif font-semibold text-lg text-ink">PulseCare</span>
         </div>
         <button onClick={handleLogout} className="flex items-center gap-1 text-gray-500 hover:text-red-600">
           <LogOut size={18} /> Logout
@@ -38,10 +38,10 @@ export default function PatientDashboard() {
       </nav>
 
       <div className="max-w-4xl mx-auto px-6 py-8">
-        <h1 className="text-2xl font-bold text-gray-800 mb-1">
+                <h1 className="font-serif text-3xl font-semibold text-ink mb-1">
           Welcome{profile ? `, ${profile.full_name}` : ''}
         </h1>
-        <p className="text-gray-500 mb-8">Here's your health overview</p>
+        <p className="text-ink/60 mb-8">Here's what's happening with your health.</p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button
