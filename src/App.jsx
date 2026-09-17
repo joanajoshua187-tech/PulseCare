@@ -9,6 +9,7 @@ import Consultation from './pages/Consultation'
 import HealthRecords from './pages/HealthRecords'
 import ProviderDashboard from './pages/ProviderDashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import Payment from './pages/Payment'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/records" element={<HealthRecords />} />
         <Route path="/provider-dashboard" element={<ProviderDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/payment/:appointmentId" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
@@ -15,6 +16,7 @@ export default function BookAppointment() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [newAppointmentId, setNewAppointmentId] = useState(null)
 
   useEffect(() => {
     const loadProviders = async () => {
@@ -44,13 +46,17 @@ export default function BookAppointment() {
       return
     }
 
-    const { error: insertError } = await supabase.from('appointments').insert({
-      patient_id: user.id,
-      provider_id: selectedProvider.id,
-      appointment_date: date,
-      appointment_time: time,
-      reason,
-    })
+    const { data: newAppt, error: insertError } = await supabase
+      .from('appointments')
+      .insert({
+        patient_id: user.id,
+        provider_id: selectedProvider.id,
+        appointment_date: date,
+        appointment_time: time,
+        reason,
+      })
+      .select()
+      .single()
 
     setLoading(false)
 
@@ -59,6 +65,7 @@ export default function BookAppointment() {
       return
     }
 
+    setNewAppointmentId(newAppt.id)
     setSuccess(true)
   }
 
@@ -73,12 +80,20 @@ export default function BookAppointment() {
           <p className="text-gray-600 mb-6">
             Your appointment with {selectedProvider.full_name} on {date} at {time} has been scheduled.
           </p>
-          <button
-            onClick={() => navigate('/dashboard')}
-            className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700"
-          >
-            Back to Dashboard
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="flex-1 border border-gray-300 text-gray-700 py-2.5 rounded-lg font-medium hover:bg-gray-50"
+            >
+              Pay Later
+            </button>
+            <button
+              onClick={() => navigate(`/payment/${newAppointmentId}`)}
+              className="flex-1 bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700"
+            >
+              Pay Now
+            </button>
+          </div>
         </div>
       </div>
     )
