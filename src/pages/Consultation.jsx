@@ -73,7 +73,7 @@ export default function Consultation() {
     return () => { document.body.removeChild(script) }
   }, [tab, appointmentId])
 
-    const sendMessage = async (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault()
     if (!newMessage.trim()) return
 
@@ -97,28 +97,28 @@ export default function Consultation() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-8">
+    <div className="min-h-screen bg-cream px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <button
           onClick={() => navigate('/appointments')}
-          className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+          className="flex items-center gap-1 text-ink/50 hover:text-ink mb-4"
         >
           <ArrowLeft size={18} /> Back to appointments
         </button>
 
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="p-6 border-b border-gray-100">
-            <h1 className="font-bold text-gray-800">
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-ink/5">
+          <div className="p-6 border-b border-ink/5">
+            <h1 className="font-serif font-semibold text-ink text-lg">
               Consultation with {appointment?.providers?.full_name || '...'}
             </h1>
-            <p className="text-sm text-gray-500">{appointment?.providers?.specialty}</p>
+            <p className="text-sm text-ink/50">{appointment?.providers?.specialty}</p>
           </div>
 
-          <div className="flex border-b border-gray-100">
+          <div className="flex border-b border-ink/5">
             <button
               onClick={() => setTab('video')}
               className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium ${
-                tab === 'video' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'
+                tab === 'video' ? 'text-teal border-b-2 border-teal' : 'text-ink/40'
               }`}
             >
               <Video size={18} /> Video Call
@@ -126,7 +126,7 @@ export default function Consultation() {
             <button
               onClick={() => setTab('chat')}
               className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium ${
-                tab === 'chat' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'
+                tab === 'chat' ? 'text-teal border-b-2 border-teal' : 'text-ink/40'
               }`}
             >
               <MessageSquare size={18} /> Chat
@@ -141,7 +141,7 @@ export default function Consultation() {
             <div className="flex flex-col h-[500px]">
               <div className="flex-1 overflow-y-auto p-4 space-y-3">
                 {messages.length === 0 && (
-                  <p className="text-center text-gray-400 text-sm mt-8">No messages yet.</p>
+                  <p className="text-center text-ink/30 text-sm mt-8">No messages yet.</p>
                 )}
                 {messages.map((msg) => (
                   <div
@@ -151,8 +151,8 @@ export default function Consultation() {
                     <div
                       className={`max-w-[70%] px-4 py-2 rounded-2xl text-sm ${
                         msg.sender_id === userId
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 text-gray-800'
+                          ? 'bg-teal text-white'
+                          : 'bg-ink/5 text-ink'
                       }`}
                     >
                       {msg.content}
@@ -160,17 +160,17 @@ export default function Consultation() {
                   </div>
                 ))}
               </div>
-              <form onSubmit={sendMessage} className="p-4 border-t border-gray-100 flex gap-2">
+              <form onSubmit={sendMessage} className="p-4 border-t border-ink/5 flex gap-2">
                 <input
                   type="text"
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="flex-1 px-3 py-2.5 border border-ink/15 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none"
                 />
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-4 rounded-lg hover:bg-blue-700"
+                  className="bg-coral text-white px-4 rounded-lg hover:bg-coral-dark"
                 >
                   <Send size={18} />
                 </button>

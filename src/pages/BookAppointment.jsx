@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
@@ -71,8 +70,8 @@ export default function BookAppointment() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-                <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center border border-ink/5">
+      <div className="min-h-screen bg-cream flex items-center justify-center px-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center border border-ink/5">
           <div className="w-16 h-16 bg-sage/15 rounded-full flex items-center justify-center mx-auto mb-4">
             <Calendar className="text-sage" size={28} />
           </div>
@@ -83,13 +82,13 @@ export default function BookAppointment() {
           <div className="flex gap-3">
             <button
               onClick={() => navigate('/dashboard')}
-              className="flex-1 border border-gray-300 text-gray-700 py-2.5 rounded-lg font-medium hover:bg-gray-50"
+              className="flex-1 border border-ink/15 text-ink py-2.5 rounded-lg font-medium hover:bg-ink/5"
             >
               Pay Later
             </button>
             <button
               onClick={() => navigate(`/payment/${newAppointmentId}`)}
-              className="flex-1 bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700"
+              className="flex-1 bg-coral text-white py-2.5 rounded-lg font-medium hover:bg-coral-dark"
             >
               Pay Now
             </button>
@@ -101,23 +100,23 @@ export default function BookAppointment() {
 
   if (selectedProvider) {
     return (
-      <div className="min-h-screen bg-slate-50 px-4 py-8">
+      <div className="min-h-screen bg-cream px-4 py-8">
         <div className="max-w-lg mx-auto">
           <button
             onClick={() => setSelectedProvider(null)}
-            className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+            className="flex items-center gap-1 text-ink/50 hover:text-ink mb-4"
           >
             <ArrowLeft size={18} /> Back to providers
           </button>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-ink/5">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
-                <User className="text-blue-600" size={26} />
+              <div className="w-14 h-14 bg-teal/10 rounded-full flex items-center justify-center">
+                <User className="text-teal" size={26} />
               </div>
               <div>
-                <h2 className="font-bold text-gray-800">{selectedProvider.full_name}</h2>
-                <p className="text-sm text-gray-500">{selectedProvider.specialty}</p>
+                <h2 className="font-serif font-semibold text-ink text-lg">{selectedProvider.full_name}</h2>
+                <p className="text-sm text-ink/50">{selectedProvider.specialty}</p>
               </div>
             </div>
 
@@ -129,19 +128,19 @@ export default function BookAppointment() {
 
             <form onSubmit={handleBook} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink mb-2">
                   <Calendar className="inline mr-1" size={16} /> Select Date
                 </label>
                 <input
                   type="date" required
                   min={new Date().toISOString().split('T')[0]}
                   value={date} onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full px-3 py-2.5 border border-ink/15 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink mb-2">
                   <Clock className="inline mr-1" size={16} /> Select Time
                 </label>
                 <div className="grid grid-cols-3 gap-2">
@@ -152,8 +151,8 @@ export default function BookAppointment() {
                       onClick={() => setTime(slot)}
                       className={`py-2 rounded-lg text-sm border transition ${
                         time === slot
-                          ? 'bg-blue-600 text-white border-blue-600'
-                          : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'
+                          ? 'bg-teal text-white border-teal'
+                          : 'bg-white text-ink border-ink/15 hover:border-teal/50'
                       }`}
                     >
                       {slot}
@@ -163,20 +162,20 @@ export default function BookAppointment() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink mb-2">
                   Reason for visit (optional)
                 </label>
                 <textarea
                   value={reason} onChange={(e) => setReason(e.target.value)}
                   rows={3}
                   placeholder="Briefly describe your reason for the visit..."
-                  className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full px-3 py-2.5 border border-ink/15 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none"
                 />
               </div>
 
               <button
                 type="submit" disabled={loading}
-                className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50"
+                className="w-full bg-coral text-white py-2.5 rounded-lg font-medium hover:bg-coral-dark transition disabled:opacity-50"
               >
                 {loading ? 'Booking...' : 'Confirm Appointment'}
               </button>
@@ -188,17 +187,17 @@ export default function BookAppointment() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-8">
+    <div className="min-h-screen bg-cream px-4 py-8">
       <div className="max-w-3xl mx-auto">
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+          className="flex items-center gap-1 text-ink/50 hover:text-ink mb-4"
         >
           <ArrowLeft size={18} /> Back
         </button>
 
-        <h1 className="text-xl font-bold text-gray-800 mb-1">Choose a Provider</h1>
-        <p className="text-gray-500 mb-6">Select a doctor or nurse to book an appointment</p>
+        <h1 className="font-serif text-xl font-semibold text-ink mb-1">Choose a Provider</h1>
+        <p className="text-ink/60 mb-6">Select a doctor or nurse to book an appointment</p>
 
         {error && (
           <div className="bg-red-50 text-red-600 text-sm p-3 rounded-lg mb-4">
@@ -211,22 +210,22 @@ export default function BookAppointment() {
             <button
               key={provider.id}
               onClick={() => setSelectedProvider(provider)}
-              className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 text-left hover:shadow-md transition"
+              className="bg-white p-5 rounded-xl shadow-sm border border-ink/5 text-left hover:shadow-md transition"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <User className="text-blue-600" size={22} />
+                <div className="w-12 h-12 bg-teal/10 rounded-full flex items-center justify-center">
+                  <User className="text-teal" size={22} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800">{provider.full_name}</h3>
-                  <p className="text-xs text-gray-500">{provider.specialty}</p>
+                  <h3 className="font-serif font-semibold text-ink">{provider.full_name}</h3>
+                  <p className="text-xs text-ink/50">{provider.specialty}</p>
                 </div>
               </div>
-              <p className="text-sm text-gray-600 mb-2">{provider.bio}</p>
-              <div className="flex items-center justify-between text-xs text-gray-500">
+              <p className="text-sm text-ink/60 mb-2">{provider.bio}</p>
+              <div className="flex items-center justify-between text-xs text-ink/50">
                 <span>{provider.years_experience} yrs experience</span>
                 <span className="flex items-center gap-1">
-                  <Star className="fill-amber-400 text-amber-400" size={14} />
+                  <Star className="fill-coral text-coral" size={14} />
                   {provider.rating}
                 </span>
               </div>

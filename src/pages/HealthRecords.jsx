@@ -37,8 +37,8 @@ export default function HealthRecords() {
 
   const urgencyColor = (level) => {
     if (level === 'emergency') return 'bg-red-50 text-red-600'
-    if (level === 'see_doctor') return 'bg-amber-50 text-amber-600'
-    return 'bg-green-50 text-green-600'
+    if (level === 'see_doctor') return 'bg-coral/10 text-coral-dark'
+    return 'bg-sage/15 text-sage'
   }
 
   const urgencyLabel = (level) => {
@@ -49,74 +49,74 @@ export default function HealthRecords() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <p className="text-gray-500">Loading your records...</p>
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <p className="text-ink/50">Loading your records...</p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-8">
+    <div className="min-h-screen bg-cream px-4 py-8">
       <div className="max-w-3xl mx-auto">
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+          className="flex items-center gap-1 text-ink/50 hover:text-ink mb-4"
         >
           <ArrowLeft size={18} /> Back
         </button>
 
-        <h1 className="text-xl font-bold text-gray-800 mb-1">Health Records</h1>
-        <p className="text-gray-500 mb-6">Your complete health history</p>
+        <h1 className="font-serif text-xl font-semibold text-ink mb-1">Health Records</h1>
+        <p className="text-ink/60 mb-6">Your complete health history</p>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-ink/5 p-6 mb-6">
           <div className="flex items-center gap-2 mb-4">
-            <User className="text-blue-600" size={20} />
-            <h2 className="font-semibold text-gray-800">Personal Information</h2>
+            <User className="text-teal" size={20} />
+            <h2 className="font-serif font-semibold text-ink">Personal Information</h2>
           </div>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <p className="text-gray-400">Full Name</p>
-              <p className="text-gray-800 font-medium">{profile?.full_name || '—'}</p>
+              <p className="text-ink/40">Full Name</p>
+              <p className="text-ink font-medium">{profile?.full_name || '—'}</p>
             </div>
             <div>
-              <p className="text-gray-400">Date of Birth</p>
-              <p className="text-gray-800 font-medium">{profile?.date_of_birth || '—'}</p>
+              <p className="text-ink/40">Date of Birth</p>
+              <p className="text-ink font-medium">{profile?.date_of_birth || '—'}</p>
             </div>
             <div>
-              <p className="text-gray-400">Gender</p>
-              <p className="text-gray-800 font-medium capitalize">{profile?.gender || '—'}</p>
+              <p className="text-ink/40">Gender</p>
+              <p className="text-ink font-medium capitalize">{profile?.gender || '—'}</p>
             </div>
             <div>
-              <p className="text-gray-400">Phone</p>
-              <p className="text-gray-800 font-medium">{profile?.phone || '—'}</p>
+              <p className="text-ink/40">Phone</p>
+              <p className="text-ink font-medium">{profile?.phone || '—'}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-ink/5 p-6 mb-6">
           <div className="flex items-center gap-2 mb-4">
-            <Pill className="text-blue-600" size={20} />
-            <h2 className="font-semibold text-gray-800">Prescriptions</h2>
+            <Pill className="text-teal" size={20} />
+            <h2 className="font-serif font-semibold text-ink">Prescriptions</h2>
           </div>
           {prescriptions.length === 0 && (
-            <p className="text-sm text-gray-400">No prescriptions yet.</p>
+            <p className="text-sm text-ink/40">No prescriptions yet.</p>
           )}
           <div className="space-y-3">
             {prescriptions.map((p) => (
-              <div key={p.id} className="border border-gray-100 rounded-lg p-4">
+              <div key={p.id} className="border border-ink/10 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-medium text-gray-800">{p.medication_name}</span>
-                  <span className="text-xs text-gray-400">
+                  <span className="font-medium text-ink">{p.medication_name}</span>
+                  <span className="text-xs text-ink/40">
                     {new Date(p.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-ink/60">
                   {p.dosage} · {p.frequency} {p.duration && `· ${p.duration}`}
                 </p>
                 {p.instructions && (
-                  <p className="text-sm text-gray-500 mt-1 italic">"{p.instructions}"</p>
+                  <p className="text-sm text-ink/50 mt-1 italic">"{p.instructions}"</p>
                 )}
-                <p className="text-xs text-gray-400 mt-2">
+                <p className="text-xs text-ink/40 mt-2">
                   Prescribed by {p.providers?.full_name} · {p.providers?.specialty}
                 </p>
               </div>
@@ -124,59 +124,59 @@ export default function HealthRecords() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-ink/5 p-6 mb-6">
           <div className="flex items-center gap-2 mb-4">
-            <Activity className="text-blue-600" size={20} />
-            <h2 className="font-semibold text-gray-800">Symptom Assessment History</h2>
+            <Activity className="text-teal" size={20} />
+            <h2 className="font-serif font-semibold text-ink">Symptom Assessment History</h2>
           </div>
           {assessments.length === 0 && (
-            <p className="text-sm text-gray-400">No assessments recorded yet.</p>
+            <p className="text-sm text-ink/40">No assessments recorded yet.</p>
           )}
           <div className="space-y-3">
             {assessments.map((a) => (
-              <div key={a.id} className="border border-gray-100 rounded-lg p-4">
+              <div key={a.id} className="border border-ink/10 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-ink/40">
                     {new Date(a.created_at).toLocaleDateString()}
                   </span>
                   <span className={`text-xs px-2 py-1 rounded-full font-medium ${urgencyColor(a.urgency_level)}`}>
                     {urgencyLabel(a.urgency_level)}
                   </span>
                 </div>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-ink/70">
                   <span className="font-medium">Symptoms:</span> {a.symptoms?.join(', ')}
                 </p>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-ink/50 mt-1">
                   Duration: {a.duration?.replace(/_/g, ' ')} · Severity: {a.severity}
                 </p>
-                {a.notes && <p className="text-sm text-gray-500 mt-1 italic">"{a.notes}"</p>}
+                {a.notes && <p className="text-sm text-ink/50 mt-1 italic">"{a.notes}"</p>}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <div className="bg-white rounded-xl shadow-sm border border-ink/5 p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Calendar className="text-blue-600" size={20} />
-            <h2 className="font-semibold text-gray-800">Appointment History</h2>
+            <Calendar className="text-teal" size={20} />
+            <h2 className="font-serif font-semibold text-ink">Appointment History</h2>
           </div>
           {appointments.length === 0 && (
-            <p className="text-sm text-gray-400">No appointments recorded yet.</p>
+            <p className="text-sm text-ink/40">No appointments recorded yet.</p>
           )}
           <div className="space-y-3">
             {appointments.map((appt) => (
-              <div key={appt.id} className="border border-gray-100 rounded-lg p-4">
+              <div key={appt.id} className="border border-ink/10 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-medium text-gray-800">{appt.providers?.full_name}</span>
-                  <span className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full capitalize">
+                  <span className="font-medium text-ink">{appt.providers?.full_name}</span>
+                  <span className="text-xs px-2 py-1 bg-teal/10 text-teal rounded-full capitalize">
                     {appt.status}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500">{appt.providers?.specialty}</p>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-ink/50">{appt.providers?.specialty}</p>
+                <p className="text-sm text-ink/50 mt-1">
                   {appt.appointment_date} at {appt.appointment_time}
                 </p>
-                {appt.reason && <p className="text-sm text-gray-500 mt-1 italic">"{appt.reason}"</p>}
+                {appt.reason && <p className="text-sm text-ink/50 mt-1 italic">"{appt.reason}"</p>}
               </div>
             ))}
           </div>

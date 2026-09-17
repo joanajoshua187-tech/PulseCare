@@ -29,26 +29,26 @@ export default function MyAppointments() {
   }, [navigate])
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-8">
+    <div className="min-h-screen bg-cream px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+          className="flex items-center gap-1 text-ink/50 hover:text-ink mb-4"
         >
           <ArrowLeft size={18} /> Back
         </button>
 
-        <h1 className="text-xl font-bold text-gray-800 mb-1">My Appointments</h1>
-        <p className="text-gray-500 mb-6">Your scheduled and past visits</p>
+        <h1 className="font-serif text-xl font-semibold text-ink mb-1">My Appointments</h1>
+        <p className="text-ink/60 mb-6">Your scheduled and past visits</p>
 
-        {loading && <p className="text-gray-500">Loading...</p>}
+        {loading && <p className="text-ink/50">Loading...</p>}
 
         {!loading && appointments.length === 0 && (
-          <div className="bg-white rounded-xl p-8 text-center border border-gray-100">
-            <p className="text-gray-500 mb-4">You have no appointments yet.</p>
+          <div className="bg-white rounded-xl p-8 text-center border border-ink/5">
+            <p className="text-ink/60 mb-4">You have no appointments yet.</p>
             <button
               onClick={() => navigate('/book')}
-              className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700"
+              className="bg-coral text-white px-5 py-2 rounded-lg font-medium hover:bg-coral-dark"
             >
               Book an Appointment
             </button>
@@ -57,18 +57,18 @@ export default function MyAppointments() {
 
         <div className="space-y-3">
           {appointments.map((appt) => (
-            <div key={appt.id} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+            <div key={appt.id} className="bg-white p-5 rounded-xl shadow-sm border border-ink/5">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <User className="text-blue-600" size={18} />
-                  <span className="font-semibold text-gray-800">{appt.providers?.full_name}</span>
+                  <User className="text-teal" size={18} />
+                  <span className="font-serif font-semibold text-ink">{appt.providers?.full_name}</span>
                 </div>
-                <span className="text-xs px-2 py-1 bg-blue-50 text-blue-600 rounded-full capitalize">
+                <span className="text-xs px-2 py-1 bg-teal/10 text-teal capitalize rounded-full">
                   {appt.status}
                 </span>
               </div>
-              <p className="text-sm text-gray-500 mb-3">{appt.providers?.specialty}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+              <p className="text-sm text-ink/50 mb-3">{appt.providers?.specialty}</p>
+              <div className="flex items-center gap-4 text-sm text-ink/60 mb-4">
                 <span className="flex items-center gap-1">
                   <Calendar size={14} /> {appt.appointment_date}
                 </span>
@@ -78,7 +78,7 @@ export default function MyAppointments() {
               </div>
               <button
                 onClick={() => navigate(`/consultation/${appt.id}`)}
-                className="w-full flex items-center justify-center gap-2 bg-teal-600 text-white py-2 rounded-lg font-medium hover:bg-teal-700"
+                className="w-full flex items-center justify-center gap-2 bg-sage text-white py-2 rounded-lg font-medium hover:opacity-90"
               >
                 <Video size={18} /> Join Consultation
               </button>

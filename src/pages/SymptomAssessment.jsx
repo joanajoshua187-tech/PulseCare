@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
-import { Stethoscope, ArrowLeft, AlertTriangle, CheckCircle2, Activity } from 'lucide-react'
+import { HeartPulse, ArrowLeft, AlertTriangle, CheckCircle2, Activity } from 'lucide-react'
 
 const SYMPTOM_OPTIONS = [
   'Fever', 'Cough', 'Headache', 'Sore throat', 'Fatigue',
@@ -77,51 +77,51 @@ export default function SymptomAssessment() {
 
   if (result) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
+      <div className="min-h-screen bg-cream flex items-center justify-center px-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center border border-ink/5">
           {result === 'emergency' && (
             <>
               <AlertTriangle className="mx-auto text-red-600 mb-4" size={48} />
-              <h2 className="text-xl font-bold text-red-600 mb-2">Seek Emergency Care</h2>
-              <p className="text-gray-600 mb-6">
-                Your symptoms may indicate a serious condition. Please go to the nearest emergency room or call emergency services immediately.
+              <h2 className="font-serif text-2xl font-semibold text-red-600 mb-2">Please seek emergency care</h2>
+              <p className="text-ink/60 mb-6">
+                Your symptoms may indicate something serious. Please go to the nearest emergency room or call emergency services now.
               </p>
             </>
           )}
           {result === 'see_doctor' && (
             <>
-              <Activity className="mx-auto text-amber-500 mb-4" size={48} />
-              <h2 className="text-xl font-bold text-amber-600 mb-2">See a Doctor Soon</h2>
-              <p className="text-gray-600 mb-6">
-                Your symptoms suggest you should consult a healthcare provider within the next day or two.
+              <Activity className="mx-auto text-coral mb-4" size={48} />
+              <h2 className="font-serif text-2xl font-semibold text-ink mb-2">Worth seeing a doctor soon</h2>
+              <p className="text-ink/60 mb-6">
+                Based on what you've shared, we'd recommend speaking with a provider within the next day or two.
               </p>
             </>
           )}
           {result === 'self_care' && (
             <>
-              <CheckCircle2 className="mx-auto text-green-600 mb-4" size={48} />
-              <h2 className="text-xl font-bold text-green-600 mb-2">Self-Care Recommended</h2>
-              <p className="text-gray-600 mb-6">
-                Your symptoms appear mild. Rest, hydration, and monitoring are recommended. Consult a doctor if symptoms worsen.
+              <CheckCircle2 className="mx-auto text-sage mb-4" size={48} />
+              <h2 className="font-serif text-2xl font-semibold text-ink mb-2">Sounds manageable at home</h2>
+              <p className="text-ink/60 mb-6">
+                Rest, fluids, and a bit of patience should help. Reach out if things get worse.
               </p>
             </>
           )}
 
-          <p className="text-xs text-gray-400 mb-6">
-            This is not a medical diagnosis. Always consult a licensed healthcare provider for medical concerns.
+          <p className="text-xs text-ink/40 mb-6">
+            This isn't a medical diagnosis. Always consult a licensed healthcare provider for medical concerns.
           </p>
 
           <div className="flex gap-3">
             <button
               onClick={() => navigate('/dashboard')}
-              className="flex-1 border border-gray-300 text-gray-700 py-2.5 rounded-lg font-medium hover:bg-gray-50"
+              className="flex-1 border border-ink/15 text-ink py-2.5 rounded-lg font-medium hover:bg-ink/5"
             >
               Back to Dashboard
             </button>
             {result !== 'self_care' && (
               <button
                 onClick={() => navigate('/book')}
-                className="flex-1 bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700"
+                className="flex-1 bg-coral text-white py-2.5 rounded-lg font-medium hover:bg-coral-dark"
               >
                 Book Appointment
               </button>
@@ -133,19 +133,19 @@ export default function SymptomAssessment() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-8">
+    <div className="min-h-screen bg-cream px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-1 text-gray-500 hover:text-gray-700 mb-4"
+          className="flex items-center gap-1 text-ink/50 hover:text-ink mb-4"
         >
           <ArrowLeft size={18} /> Back
         </button>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-lg p-8 border border-ink/5">
           <div className="flex items-center gap-2 mb-6">
-            <Stethoscope className="text-blue-600" size={28} />
-            <h1 className="text-xl font-bold text-gray-800">Symptom Assessment</h1>
+            <HeartPulse className="text-coral" size={26} />
+            <h1 className="font-serif text-xl font-semibold text-ink">How are you feeling?</h1>
           </div>
 
           {error && (
@@ -156,7 +156,7 @@ export default function SymptomAssessment() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink mb-2">
                 Select your symptoms
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -167,8 +167,8 @@ export default function SymptomAssessment() {
                     onClick={() => toggleSymptom(symptom)}
                     className={`px-3 py-2 rounded-lg text-sm border transition ${
                       selectedSymptoms.includes(symptom)
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'
+                        ? 'bg-teal text-white border-teal'
+                        : 'bg-white text-ink border-ink/15 hover:border-teal/50'
                     }`}
                   >
                     {symptom}
@@ -178,12 +178,12 @@ export default function SymptomAssessment() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink mb-2">
                 How long have you had these symptoms?
               </label>
               <select
                 value={duration} onChange={(e) => setDuration(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                className="w-full px-3 py-2.5 border border-ink/15 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none"
               >
                 <option value="">Select duration</option>
                 <option value="less_than_1_day">Less than a day</option>
@@ -194,7 +194,7 @@ export default function SymptomAssessment() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink mb-2">
                 How severe would you rate it?
               </label>
               <div className="flex gap-3">
@@ -205,8 +205,8 @@ export default function SymptomAssessment() {
                     onClick={() => setSeverity(level)}
                     className={`flex-1 py-2 rounded-lg text-sm font-medium border capitalize transition ${
                       severity === level
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400'
+                        ? 'bg-teal text-white border-teal'
+                        : 'bg-white text-ink border-ink/15 hover:border-teal/50'
                     }`}
                   >
                     {level}
@@ -216,22 +216,22 @@ export default function SymptomAssessment() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Additional notes (optional)
+              <label className="block text-sm font-medium text-ink mb-2">
+                Anything else worth mentioning? (optional)
               </label>
               <textarea
                 value={notes} onChange={(e) => setNotes(e.target.value)}
                 rows={3}
                 placeholder="Anything else you'd like to mention..."
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                className="w-full px-3 py-2.5 border border-ink/15 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none"
               />
             </div>
 
             <button
               type="submit" disabled={loading}
-              className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50"
+              className="w-full bg-coral text-white py-2.5 rounded-lg font-medium hover:bg-coral-dark transition disabled:opacity-50"
             >
-              {loading ? 'Submitting...' : 'Get Assessment'}
+              {loading ? 'Submitting...' : 'Get My Assessment'}
             </button>
           </form>
         </div>
